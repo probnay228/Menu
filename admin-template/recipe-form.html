@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма рецепта — Кухни мира 2026</title>
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+    <style>
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
+        .full-col { grid-column: 1 / -1; }
+        .photo-list { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+        .photo-box { border: 1px solid var(--border-color); border-radius: 6px; padding: 8px; width: 165px; background: #f9fafb; text-align: center; }
+        .photo-box img { width: 100%; height: 85px; object-fit: contain; background: #111827; margin-bottom: 6px; }
+        .sub-block { background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 6px; padding: 12px; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                Кухни мира
+                <small>2026 — Год единства народов России</small>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="recipes.html" class="active">Рецепты</a></li>
+                <li><a href="ingredients.html">Ингредиенты</a></li>
+                <li><a href="categories.html">Категории рецептов</a></li>
+                <li><a href="orders.html">Заказы пользователей</a></li>
+            </ul>
+        </aside>
+
+        <div class="main-wrapper">
+            <header class="topbar">
+                <strong>Создание / Редактирование рецепта</strong>
+                <a href="recipes.html" class="btn btn-outline btn-sm">← Назад к списку</a>
+            </header>
+
+            <main class="content-area">
+                <form class="card" action="/admin/recipes/save" method="POST" enctype="multipart/form-data" novalidate>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Название рецепта (макс. 20 символов) *</label>
+                            <input type="text" name="title" class="form-control" maxlength="20" required>
+                            <span class="invalid-feedback">Введите название (не более 20 символов).</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Категория рецепта *</label>
+                            <select name="category_id" class="form-control" required>
+                                <option value="">Выберите категорию</option>
+                                <option value="1">Татарская кухня</option>
+                                <option value="2">Кавказская кухня</option>
+                            </select>
+                            <span class="invalid-feedback">Выберите категорию из списка.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Время приготовления (в минутах) *</label>
+                            <input type="number" name="cook_time" class="form-control" min="1" required>
+                            <span class="invalid-feedback">Укажите время в минутах.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Сложность *</label>
+                            <select name="difficulty" class="form-control" required>
+                                <option value="easy">Легко</option>
+                                <option value="medium">Средне</option>
+                                <option value="hard">Сложно</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Цена рецепта (формат хх.хх, больше 100 или 0)</label>
+                            <input type="text" name="price" class="form-control" placeholder="150.00">
+                            <span class="invalid-feedback">Укажите цену в формате хх.хх (больше 100) или 0.</span>
+                        </div>
+
+                        <div class="form-group full-col">
+                            <label class="form-label">Описание рецепта (от 50 до 250 символов) *</label>
+                            <textarea name="description" class="form-control" rows="3" minlength="50" maxlength="250" required></textarea>
+                            <span class="invalid-feedback">Описание должно содержать от 50 до 250 символов.</span>
+                        </div>
+
+                        <!-- Фотографии рецепта (1-5 шт.) -->
+                        <div class="form-group full-col">
+                            <label class="form-label">Фотографии рецепта (1–5 шт., мин. 500×500px, до 2 МБ: jpg, jpeg, png, webp) *</label>
+                            <input type="file" name="photos[]" class="form-control" accept=".jpg,.jpeg,.png,.webp" multiple>
+                            <span class="invalid-feedback">Загрузите от 1 до 5 корректных изображений.</span>
+
+                            <!-- Превью загруженных фото при редактировании -->
+                            <div class="photo-list">
+                                <div class="photo-box">
+                                    <img src="https://placehold.co" alt="Фото 1">
+                                    <label style="font-size: 0.8rem; display: block; margin-bottom: 6px;">
+                                        <input type="radio" name="default_photo" value="1" checked> По умолчанию
+                                    </label>
+                                    <button type="button" class="btn btn-danger btn-sm" style="width: 100%;">Удалить</button>
+                                </div>
+                                <div class="photo-box">
+                                    <img src="https://placehold.co" alt="Фото 2">
+                                    <label style="font-size: 0.8rem; display: block; margin-bottom: 6px;">
+                                        <input type="radio" name="default_photo" value="2"> По умолчанию
+                                    </label>
+                                    <button type="button" class="btn btn-danger btn-sm" style="width: 100%;">Удалить</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Ингредиенты (минимум 1) -->
+                    <h3 style="margin: 20px 0 10px; font-size: 1.05rem;">Ингредиенты рецепта (минимум 1) *</h3>
+                    <div id="ingredients-container">
+                        <div class="sub-block form-grid" style="align-items: end;">
+                            <div>
+                                <label class="form-label">Ингредиент</label>
+                                <select name="ingredients[0][id]" class="form-control" required>
+                                    <option value="1">Мука пшеничная (кг)</option>
+                                    <option value="2">Молоко (л)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="form-label">Количество</label>
+                                <input type="number" step="0.01" name="ingredients[0][amount]" class="form-control" required>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-outline">Удалить</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="add-ingredient" class="btn btn-outline btn-sm" style="margin-bottom: 20px;">+ Добавить ингредиент</button>
+
+                    <!-- Шаги рецепта (минимум 1) -->
+                    <h3 style="margin: 10px 0; font-size: 1.05rem;">Шаги выполнения рецепта (минимум 1) *</h3>
+                    <div id="steps-container">
+                        <div class="sub-block form-grid">
+                            <div>
+                                <label class="form-label">Название шага (до 40 симв.) *</label>
+                                <input type="text" name="steps[0][title]" class="form-control" maxlength="40" required>
+                            </div>
+                            <div>
+                                <label class="form-label">Описание шага (до 255 симв.) *</label>
+                                <textarea name="steps[0][description]" class="form-control" rows="2" maxlength="255" required></textarea>
+                            </div>
+                            <div>
+                                <label class="form-label">Фотография шага (до 2 МБ) *</label>
+                                <input type="file" name="steps[0][photo]" class="form-control" accept=".jpg,.jpeg,.png,.webp" required>
+                            </div>
+                            <div style="display: flex; align-items: end;">
+                                <button type="button" class="btn btn-outline">Удалить шаг</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" id="add-step" class="btn btn-outline btn-sm">+ Добавить шаг</button>
+
+                    <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #e5e7eb;">
+                        <button type="submit" class="btn btn-primary">Сохранить рецепт</button>
+                    </div>
+                </form>
+            </main>
+        </div>
+    </div>
+    <script src="assets/js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказы пользователей — Кухни мира 2026</title>
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                Кухни мира
+                <small>2026 — Год единства народов России</small>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="recipes.html">Рецепты</a></li>
+                <li><a href="ingredients.html">Ингредиенты</a></li>
+                <li><a href="categories.html">Категории рецептов</a></li>
+                <li><a href="orders.html" class="active">Заказы пользователей</a></li>
+            </ul>
+        </aside>
+
+        <div class="main-wrapper">
+            <header class="topbar">
+                <strong>Заказы пользователей</strong>
+                <span>admin@champ2026 | <a href="login.html">Выйти</a></span>
+            </header>
+
+            <main class="content-area">
+                <div class="page-header">
+                    <h1>Список заказов</h1>
+                </div>
+
+                <!-- Таблица заказов (пагинация по 5 на страницу) -->
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Клиент (ФИО / Email)</th>
+                                <th>Список рецептов для покупки</th>
+                                <th>Общая стоимость</th>
+                                <th>Статус оплаты</th>
+                                <th style="width: 160px;">Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Статус: Оплачено -->
+                            <tr>
+                                <td>
+                                    <strong>Иванов Иван Иванович</strong><br>
+                                    <span style="color: var(--text-muted); font-size: 0.85rem;">ivanov@mail.ru</span>
+                                </td>
+                                <td>
+                                    <ul style="padding-left: 16px; font-size: 0.875rem;">
+                                        <li>Эчпочмак — <strong>250.00 ₽</strong></li>
+                                        <li>Хинкали — <strong>450.00 ₽</strong></li>
+                                    </ul>
+                                </td>
+                                <td><strong>700.00 ₽</strong></td>
+                                <td><span class="badge badge-easy">Оплачено</span></td>
+                                <td>—</td>
+                            </tr>
+
+                            <!-- Статус: Не оплачено -->
+                            <tr>
+                                <td>
+                                    <strong>Смирнова Анна Петровна</strong><br>
+                                    <span style="color: var(--text-muted); font-size: 0.85rem;">anna@mail.ru</span>
+                                </td>
+                                <td>
+                                    <ul style="padding-left: 16px; font-size: 0.875rem;">
+                                        <li>Эчпочмак — <strong>250.00 ₽</strong></li>
+                                    </ul>
+                                </td>
+                                <td><strong>250.00 ₽</strong></td>
+                                <td><span class="badge badge-medium">Не оплачено</span></td>
+                                <td>—</td>
+                            </tr>
+
+                            <!-- Статус: Ошибка оплаты (можно удалить) -->
+                            <tr>
+                                <td>
+                                    <strong>Петров Алексей Сергеевич</strong><br>
+                                    <span style="color: var(--text-muted); font-size: 0.85rem;">petrov@mail.ru</span>
+                                </td>
+                                <td>
+                                    <ul style="padding-left: 16px; font-size: 0.875rem;">
+                                        <li>Хинкали — <strong>450.00 ₽</strong></li>
+                                    </ul>
+                                </td>
+                                <td><strong>450.00 ₽</strong></td>
+                                <td><span class="badge badge-hard">Ошибка оплаты</span></td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm">Удалить заказ</button>
+                                </td>
+                            </tr>
+
+                            <!-- Статус: Истекло время на оплату (можно удалить) -->
+                            <tr>
+                                <td>
+                                    <strong>Козлова Мария Дмитриевна</strong><br>
+                                    <span style="color: var(--text-muted); font-size: 0.85rem;">kozlova@mail.ru</span>
+                                </td>
+                                <td>
+                                    <ul style="padding-left: 16px; font-size: 0.875rem;">
+                                        <li>Эчпочмак — <strong>250.00 ₽</strong></li>
+                                    </ul>
+                                </td>
+                                <td><strong>250.00 ₽</strong></td>
+                                <td><span class="badge badge-hard">Истекло время на оплату</span></td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-sm">Удалить заказ</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Пагинация по 5 заказов -->
+                <nav class="pagination">
+                    <a href="#" class="page-link active">1</a>
+                    <a href="#" class="page-link">2</a>
+                    <a href="#" class="page-link">3</a>
+                </nav>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

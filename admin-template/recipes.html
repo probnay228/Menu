@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Рецепты — Кухни мира 2026</title>
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                Кухни мира
+                <small>2026 — Год единства народов России</small>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="recipes.html" class="active">Рецепты</a></li>
+                <li><a href="ingredients.html">Ингредиенты</a></li>
+                <li><a href="categories.html">Категории рецептов</a></li>
+                <li><a href="orders.html">Заказы пользователей</a></li>
+            </ul>
+        </aside>
+
+        <div class="main-wrapper">
+            <header class="topbar">
+                <strong>Управление рецептами</strong>
+                <span>admin@champ2026 | <a href="login.html">Выйти</a></span>
+            </header>
+
+            <main class="content-area">
+                <div class="page-header">
+                    <h1>Список рецептов</h1>
+                    <a href="recipe-form.html" class="btn btn-primary">+ Создать рецепт</a>
+                </div>
+
+                <!-- Фильтрация и сортировка -->
+                <form class="filters-bar" method="GET">
+                    <div>
+                        <label class="form-label">Сложность</label>
+                        <select name="difficulty" class="form-control">
+                            <option value="">Все</option>
+                            <option value="easy">Легко</option>
+                            <option value="medium">Средне</option>
+                            <option value="hard">Сложно</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Время приготовления</label>
+                        <select name="cook_time" class="form-control">
+                            <option value="">Любое</option>
+                            <option value="15">До 15 минут</option>
+                            <option value="60-120">60–120 минут</option>
+                            <option value="120+">Свыше 120 минут</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Категория</label>
+                        <select name="category_id" class="form-control">
+                            <option value="">Все категории</option>
+                            <option value="1">Татарская кухня</option>
+                            <option value="2">Кавказская кухня</option>
+                            <option value="3">Русская кухня</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Стоимость</label>
+                        <select name="price" class="form-control">
+                            <option value="">Все</option>
+                            <option value="0">Бесплатно (0)</option>
+                            <option value="paid">Платные (свыше 100 ₽)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="form-label">Сортировка</label>
+                        <select name="sort" class="form-control">
+                            <option value="newest_desc" selected>По новизне 🔽</option>
+                            <option value="newest_asc">По новизне 🔼</option>
+                            <option value="time_asc">По времени приготовления 🔼</option>
+                            <option value="time_desc">По времени приготовления 🔽</option>
+                        </select>
+                    </div>
+                    <div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Найти</button>
+                    </div>
+                </form>
+
+                <!-- Сетка рецептов (по 5 на страницу) -->
+                <div class="recipes-grid">
+                    <!-- Карточка 1: Платный рецепт -->
+                    <article class="recipe-card">
+                        <div class="recipe-thumb">
+                            <img src="https://placehold.co" alt="Эчпочмак">
+                        </div>
+                        <div class="recipe-body">
+                            <h3 class="recipe-title">Эчпочмак</h3>
+                            <div class="recipe-meta">
+                                <span class="badge">1 час 20 минут</span>
+                                <span class="badge badge-medium">Средне</span>
+                                <span class="badge badge-price">250.00 ₽</span>
+                            </div>
+                            <div class="recipe-actions">
+                                <a href="recipe-form.html" class="btn btn-outline btn-sm">Редактировать</a>
+                                <button type="button" class="btn btn-danger btn-sm">Удалить</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Карточка 2: Бесплатный рецепт -->
+                    <article class="recipe-card">
+                        <div class="recipe-thumb">
+                            <img src="https://placehold.co" alt="Блины">
+                        </div>
+                        <div class="recipe-body">
+                            <h3 class="recipe-title">Блины русские</h3>
+                            <div class="recipe-meta">
+                                <span class="badge">25 минут</span>
+                                <span class="badge badge-easy">Легко</span>
+                            </div>
+                            <div class="recipe-actions">
+                                <a href="recipe-form.html" class="btn btn-outline btn-sm">Редактировать</a>
+                                <button type="button" class="btn btn-danger btn-sm">Удалить</button>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Карточка 3: Помеченный на удаление -->
+                    <article class="recipe-card is-deleted">
+                        <div class="deleted-badge">Помечен на удаление</div>
+                        <div class="recipe-thumb">
+                            <img src="https://placehold.co" alt="Хинкали">
+                        </div>
+                        <div class="recipe-body">
+                            <h3 class="recipe-title">Хинкали</h3>
+                            <div class="recipe-meta">
+                                <span class="badge">2 часа</span>
+                                <span class="badge badge-hard">Сложно</span>
+                                <span class="badge badge-price">450.00 ₽</span>
+                            </div>
+                            <div class="recipe-actions">
+                                <button type="button" class="btn btn-success btn-sm">Восстановить</button>
+                                <button type="button" class="btn btn-danger btn-sm">Окончательно удалить</button>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Пагинация -->
+                <nav class="pagination">
+                    <a href="#" class="page-link active">1</a>
+                    <a href="#" class="page-link">2</a>
+                    <a href="#" class="page-link">3</a>
+                </nav>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

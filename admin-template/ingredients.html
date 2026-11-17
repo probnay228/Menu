@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ингредиенты — Кухни мира 2026</title>
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                Кухни мира
+                <small>2026 — Год единства народов России</small>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="recipes.html">Рецепты</a></li>
+                <li><a href="ingredients.html" class="active">Ингредиенты</a></li>
+                <li><a href="categories.html">Категории рецептов</a></li>
+                <li><a href="orders.html">Заказы пользователей</a></li>
+            </ul>
+        </aside>
+
+        <div class="main-wrapper">
+            <header class="topbar">
+                <strong>Справочник ингредиентов</strong>
+                <span>admin@champ2026 | <a href="login.html">Выйти</a></span>
+            </header>
+
+            <main class="content-area">
+                <div class="page-header">
+                    <h1>Ингредиенты</h1>
+                </div>
+
+                <!-- Форма добавления / редактирования -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <h2 style="font-size: 1.1rem; margin-bottom: 16px;">Добавить / Редактировать ингредиент</h2>
+                    <form action="/admin/ingredients/save" method="POST" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; align-items: start;" novalidate>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label">Название (уникальное, макс. 20 симв.) *</label>
+                            <input type="text" name="title" class="form-control" maxlength="20" placeholder="Например: Мука" required>
+                            <span class="invalid-feedback">Такой ингредиент уже существует или превышено 20 символов.</span>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label">Единица измерения *</label>
+                            <select name="unit" class="form-control" required>
+                                <option value="">Выберите единицу</option>
+                                <option value="шт">шт</option>
+                                <option value="л">л</option>
+                                <option value="кг">кг</option>
+                                <option value="мг">мг</option>
+                                <option value="ст.л.">ст.л.</option>
+                            </select>
+                            <span class="invalid-feedback">Выберите единицу измерения.</span>
+                        </div>
+
+                        <div style="padding-top: 28px;">
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Список ингредиентов -->
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Название</th>
+                                <th>Единица измерения</th>
+                                <th style="width: 220px;">Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Мука пшеничная</td>
+                                <td>кг</td>
+                                <td>
+                                    <button type="button" class="btn btn-outline btn-sm">Редактировать</button>
+                                    <button type="button" class="btn btn-danger btn-sm">Удалить</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Молоко</td>
+                                <td>л</td>
+                                <td>
+                                    <button type="button" class="btn btn-outline btn-sm">Редактировать</button>
+                                    <button type="button" class="btn btn-danger btn-sm">Удалить</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Яйцо куриное</td>
+                                <td>шт</td>
+                                <td>
+                                    <button type="button" class="btn btn-outline btn-sm">Редактировать</button>
+                                    <button type="button" class="btn btn-danger btn-sm">Удалить</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>

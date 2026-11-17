@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Категории рецептов — Кухни мира 2026</title>
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                Кухни мира
+                <small>2026 — Год единства народов России</small>
+            </div>
+            <ul class="sidebar-nav">
+                <li><a href="recipes.html">Рецепты</a></li>
+                <li><a href="ingredients.html">Ингредиенты</a></li>
+                <li><a href="categories.html" class="active">Категории рецептов</a></li>
+                <li><a href="orders.html">Заказы пользователей</a></li>
+            </ul>
+        </aside>
+
+        <div class="main-wrapper">
+            <header class="topbar">
+                <strong>Категории рецептов</strong>
+                <span>admin@champ2026 | <a href="login.html">Выйти</a></span>
+            </header>
+
+            <main class="content-area">
+                <div class="page-header">
+                    <h1>Категории</h1>
+                </div>
+
+                <!-- Форма добавления / редактирования -->
+                <div class="card" style="margin-bottom: 24px;">
+                    <h2 style="font-size: 1.1rem; margin-bottom: 16px;">Добавить / Редактировать категорию</h2>
+                    <form action="/admin/categories/save" method="POST" style="display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: start; max-width: 640px;" novalidate>
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label">Название категории (уникальное, макс. 40 симв.) *</label>
+                            <input type="text" name="title" class="form-control" maxlength="40" placeholder="Например: Татарская кухня" required>
+                            <span class="invalid-feedback">Название обязательно, уникально и не длиннее 40 символов.</span>
+                        </div>
+
+                        <div style="padding-top: 28px;">
+                            <button type="submit" class="btn btn-primary">Сохранить</button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Таблица категорий -->
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Название категории</th>
+                                <th>Рецептов в категории</th>
+                                <th style="width: 220px;">Действия</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Категория с рецептами: удаление запрещено -->
+                            <tr>
+                                <td>1</td>
+                                <td>Татарская кухня</td>
+                                <td>5</td>
+                                <td>
+                                    <button type="button" class="btn btn-outline btn-sm">Редактировать</button>
+                                    <button type="button" class="btn btn-outline btn-sm" disabled title="Нельзя удалить категорию, в которой есть рецепты">Удалить</button>
+                                </td>
+                            </tr>
+                            <!-- Пустая категория: удаление разрешено -->
+                            <tr>
+                                <td>2</td>
+                                <td>Бурятская кухня</td>
+                                <td>0</td>
+                                <td>
+                                    <button type="button" class="btn btn-outline btn-sm">Редактировать</button>
+                                    <button type="button" class="btn btn-danger btn-sm">Удалить</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
